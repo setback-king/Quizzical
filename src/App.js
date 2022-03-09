@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import Main from "./components/Main"
+import Quiz from "./components/Quiz"
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+
+export default function App() {
+    
+    const [quiz, setQuiz] = React.useState(false) 
+    
+    const [checked, setChecked] = React.useState(false)
+    
+    
+function generateQuiz() {
+    setQuiz(prevValue => prevValue = !prevValue)
 }
 
-export default App;
+function checkAnswers() {
+    setChecked(prevValue => prevValue = !prevValue)
+}
+
+function newGame() {
+    setChecked(prevValue => prevValue = !prevValue)
+}
+    
+    return (
+        <div className="container">
+            {quiz && <Main generateQuiz={generateQuiz} /> }
+            {!quiz && <Quiz checkAnswers={checkAnswers} checked={checked} newGame={newGame}/>}
+        
+        </div>
+    )
+}
