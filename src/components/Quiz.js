@@ -29,7 +29,7 @@ export default function Quiz(props) {
     useEffect(()=> {
         function storeQuestions(){
             setChoice(prevValue => {
-                const questionArray = []
+                const questionContainer = []
                 data.map(item => {
                    let obj = {
                         question: item.question,
@@ -40,11 +40,11 @@ export default function Quiz(props) {
                         answers: [item.correct_answer, item.incorrect_answers[0], item.incorrect_answers[1], item.incorrect_answers[2]],
                         id: nanoid()
                     }
-                    questionArray.push(obj)
+                    questionContainer.push(obj)
                 })
 
-               let thisWorks = arrayShuffle(questionArray)
-                return thisWorks
+            let shuffledQuestions = arrayShuffle(questionContainer)
+            return shuffledQuestions
             })  
            
         }
@@ -58,9 +58,9 @@ export default function Quiz(props) {
                 const answerArray = []
                 choice.map(choices => {
             
-                    const questionArray = [{questions: choices.question}]
-                    const workArray = []
-                    const totalArray = []
+                    const questionContainer = [{questions: choices.question}]
+                    const tempContainer = []
+                    const allItems = []
                     for(let i = 0; i < choices.answers.length; i++) {
                     let answerObj = {
                         answer: choices.answers[i],
@@ -68,14 +68,14 @@ export default function Quiz(props) {
                         selected: false,
                         id: nanoid()
                         }
-                    workArray.push(answerObj)
+                    tempContainer.push(answerObj)
                     
                   }
-                    const test = arrayShuffle(workArray)
-                    totalArray.push(...test)
+                    const test = arrayShuffle(tempContainer)
+                    allItems.push(...test)
                       
-                       totalArray.push(...questionArray)
-                       return answerArray.push(totalArray)
+                       allItems.push(...questionContainer)
+                       return answerArray.push(allItems)
                 })
                 return answerArray
             })
@@ -84,7 +84,7 @@ export default function Quiz(props) {
         storeAnswers()
     }, [choice])
   
-console.log(answers)
+    console.log(answers)
 
     function checkAnswers() {
         setChecked(prevValue => prevValue = !prevValue)
@@ -94,19 +94,19 @@ console.log(answers)
     function selectChoice(id, index){
         console.log(id)
         setAnswers(prevAnswers => {
-            const newFinish = []
+            const allAnswers = []
             prevAnswers.map(item => {
-                const newAnswers = []
+                const tempAnswers = []
                 for(let i = 0; i < item.length; i++) {
                     if(item[i].id === id) {
-                        let objj = {
+                        let obj = {
                             ...item[i],
                             selected: !item[i].selected  
                         }
-                        newAnswers.push(objj)
+                        tempAnswers.push(obj)
                     }
                     else {
-                        newAnswers.push({
+                        tempAnswers.push({
                             ...item[i],
                             selected: item[i].selected
                         })
@@ -114,9 +114,9 @@ console.log(answers)
 
                    
                 }
-                newFinish.push(newAnswers)
+                allAnswers.push(tempAnswers)
             })
-            return newFinish
+            return allAnswers
         })
     }
 
