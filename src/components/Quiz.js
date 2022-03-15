@@ -19,7 +19,7 @@ export default function Quiz(props) {
     
   useEffect(() => {  
          function fetchData(){
-            fetch(`https://opentdb.com/api.php?amount=5&category=${props.categoryJ}&difficulty=${props.difficulty}&type=multiple`)
+            fetch(`https://opentdb.com/api.php?amount=5&category=${props.category}&difficulty=${props.difficulty}&type=multiple`)
             .then(res => res.json())
             .then(data => setData(data.results))
             .catch((error) => console.log('Error: ' + error));

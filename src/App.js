@@ -57,7 +57,7 @@ function selectCategory(event){
    })
 
 
-   
+   console.log(category.value)
 }
 
 console.log(category.value)
@@ -68,8 +68,8 @@ function generateQuiz() {
     
     return (
         <div className="container">
-            {quiz && <Main categories={categories} name={category.value} difficulty={selectDifficulty} quizCategory={category.value} quizDifficulty={difficulty} idCategory={category.id} category={selectCategory} generateQuiz={generateQuiz} /> }
-            {!quiz && <Quiz home={generateQuiz} difficulty={difficulty} category={category.value}/>}
+            {!quiz && <Main categories={categories} name={category.value} difficulty={selectDifficulty} quizCategory={category.value} quizDifficulty={difficulty} category={selectCategory} generateQuiz={generateQuiz} /> }
+            {quiz && <Quiz home={generateQuiz} difficulty={difficulty} category={category.value}/>}
         
         </div>
     )
