@@ -19,7 +19,7 @@ export default function Quiz(props) {
     
   useEffect(() => {  
          function fetchData(){
-            fetch(`https://opentdb.com/api.php?amount=5&category=${props.category}&difficulty=${props.difficulty}&type=multiple`)
+            fetch(`https://opentdb.com/api.php?amount=5&category=${props.categoryJ}&difficulty=${props.difficulty}&type=multiple`)
             .then(res => res.json())
             .then(data => setData(data.results))
             .catch((error) => console.log('Error: ' + error));
@@ -141,8 +141,8 @@ export default function Quiz(props) {
           
     }
 
-// somehow incorporate index so that you can only select one choice from each question. right now multiple choices can be selected
-    function selectChoice(id, index, questionID){
+
+    function selectChoice(id, questionID){
         console.log(questionID)
         
         setAnswers(prevAnswers => {
@@ -173,6 +173,7 @@ export default function Quiz(props) {
         setChecked(prevValue => !prevValue)
         setCount(0)
         setGame(prevValue => !prevValue)
+        
        
     }
     
