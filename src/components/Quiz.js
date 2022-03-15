@@ -11,20 +11,30 @@ export default function Quiz(props) {
     const [choice, setChoice] = useState([]);
     const [answers, setAnswers] = useState([])
     const [checked, setChecked] = useState(false)
+    const [count, setCount] = useState(0)
+    const [game, setGame] = useState(false)
+   
 
 
     
   useEffect(() => {  
          function fetchData(){
-            fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+            fetch(`https://opentdb.com/api.php?amount=5&category=${props.category}&difficulty=${props.difficulty}&type=multiple`)
             .then(res => res.json())
             .then(data => setData(data.results))
+            .catch((error) => console.log('Error: ' + error));
         }
         
         fetchData()
         
       
-  }, [])
+  }, [game])
+
+       //`https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`
+
+    
+
+
 
     useEffect(()=> {
         function storeQuestions(){
@@ -35,7 +45,6 @@ export default function Quiz(props) {
                         question: item.question,
                         correct: item.correct_answer,
                         incorrect: item.incorrect_answers,
-                        rightChoice: false,
                         // took out arrayShuffle to keep answer array in same order. map over that array to from new object state
                         answers: [item.correct_answer, item.incorrect_answers[0], item.incorrect_answers[1], item.incorrect_answers[2]],
                         id: nanoid()
@@ -58,7 +67,8 @@ export default function Quiz(props) {
                 const answerArray = []
                 choice.map(choices => {
             
-                    const questionContainer = [{questions: choices.question}]
+                    const questionContainer = [{questions: choices.question,
+                                                id: nanoid()}]
                     const tempContainer = []
                     const allItems = []
                     for(let i = 0; i < choices.answers.length; i++) {
@@ -66,7 +76,10 @@ export default function Quiz(props) {
                         answer: choices.answers[i],
                         correct: (i === 0 ? true : false),
                         selected: false,
-                        id: nanoid()
+                        id: nanoid(),
+                        background: '',
+                        opacity: ''
+                    
                         }
                     tempContainer.push(answerObj)
                     
@@ -84,70 +97,72 @@ export default function Quiz(props) {
         storeAnswers()
     }, [choice])
   
-    console.log(answers)
+    console.log(count)
 
     function checkAnswers() {
-        setChecked(prevValue => prevValue = !prevValue)
-    }
-
-
-    function selectChoice(id, index){
-        console.log(id)
+        setChecked(prevValue => !prevValue)
         setAnswers(prevAnswers => {
-            const allAnswers = []
-            prevAnswers.map(item => {
-                const tempAnswers = []
-                for(let i = 0; i < item.length; i++) {
-                    if(item[i].id === id) {
-                        let obj = {
-                            ...item[i],
-                            selected: !item[i].selected  
-                        }
-                        tempAnswers.push(obj)
-                    }
-                    else {
-                        tempAnswers.push({
-                            ...item[i],
-                            selected: item[i].selected
-                        })
-                    }
-
-                   
-                }
-                allAnswers.push(tempAnswers)
+            return  prevAnswers.map((item) => {
+             
+               return item.map(single => {
+                 if(single.selected === true && single.correct === true) {
+                     setCount(prevCount => prevCount + 1)
+                     return {
+                         ...single,
+                         background: "#94D7A2"
+                     }
+              
+               }
+               else if(single.selected === true && single.correct === false) {
+                  
+                   return {
+                       ...single,
+                       background: "#F8BCBC",
+                       opacity: "0.5"
+                   }
+               }
+               else if(single.selected === false && single.correct === true) {
+                   return {
+                       ...single,
+                       background: "#94D7A2"
+                   }
+               }
+               else return {
+                   ...single,
+                   opacity: "0.5",
+                   background: ""
+                   }
+               
+               })         
+            
             })
-            return allAnswers
-        })
+           
+          })
+          
     }
 
+// somehow incorporate index so that you can only select one choice from each question. right now multiple choices can be selected
+    function selectChoice(id, index, questionID){
+        console.log(questionID)
+        
+        setAnswers(prevAnswers => {
+          return  prevAnswers.map((item) => {
+             if(item[4].id === questionID) {
+             return item.map(single => {
+               return (single.id === id ? {...single, selected: !single.selected, background: "#D6DBF5"} : {...single,
+            selected: false,
+            background: ''})
 
-       /* setAnswers(prevValue => {
-            const newValues = []
-            prevValue.map(item => {
-                let trial = []
-                item[0].map(single => {
-                if(single.id === id) {
-                    let newObj = {
-                        ...single,
-                        selected: !single.selected
-                    }
-                    trial.push(newObj)
-                }
-                else trial.push(single)
-
-                })
-                let combinedValues = []
-                combinedValues.push(trial)
-                combinedValues.push(item[1])
-                newValues.push(combinedValues)
-            })    
-            
-            return newValues        
+             })
+            }
+            else return item
+          })
+        
         })
+    }
+       
 
-        */
-
-
+    
 
     
 
@@ -155,7 +170,10 @@ export default function Quiz(props) {
 
 
   function newGame() {
-        setChecked(prevValue => prevValue = !prevValue)
+        setChecked(prevValue => !prevValue)
+        setCount(0)
+        setGame(prevValue => !prevValue)
+       
     }
     
     let questionElements = answers.map((item, index) => {
@@ -165,10 +183,10 @@ export default function Quiz(props) {
     
                 <h4>{decode(item[4].questions)}</h4>
                 <div className="answers">
-                    <div onClick={() => selectChoice(item[0].id, index)} className={item[0].selected ? "selected choices" : "choices"} key={item[0].id}>{decode(item[0].answer)}</div>  
-                    <div onClick={() => selectChoice(item[1].id, index)} className={item[1].selected ? "selected choices" : "choices"} key={item[1].id}>{decode(item[1].answer)}</div>
-                    <div onClick={() => selectChoice(item[2].id, index)} className={item[2].selected ? "selected choices" : "choices"} key={item[2].id}>{decode(item[2].answer)}</div>
-                    <div onClick={() => selectChoice(item[3].id, index)} className={item[3].selected ? "selected choices" : "choices"} key={item[3].id}>{decode(item[3].answer)}</div>
+                    <div onClick={() => selectChoice(item[0].id, index, item[4].id)} style={{backgroundColor: item[0].background, opacity: item[0].opacity}} className={"choices"} key={item[0].id}>{decode(item[0].answer)}</div>  
+                    <div onClick={() => selectChoice(item[1].id, index, item[4].id)} style={{backgroundColor: item[1].background, opacity: item[1].opacity}} className={"choices"} key={item[1].id}>{decode(item[1].answer)}</div>
+                    <div onClick={() => selectChoice(item[2].id, index, item[4].id)} style={{backgroundColor: item[2].background, opacity: item[2].opacity}} className={"choices"} key={item[2].id}>{decode(item[2].answer)}</div>
+                    <div onClick={() => selectChoice(item[3].id, index, item[4].id)} style={{backgroundColor: item[3].background, opacity: item[3].opacity}} className={"choices"} key={item[3].id}>{decode(item[3].answer)}</div>
                 </div>
                  <hr/>
             </div>
@@ -188,8 +206,9 @@ export default function Quiz(props) {
             
             
             {checked ?  <div className="newGame"> 
-            <span className="score">You scored count / 5 </span> 
+            <span className="score">You scored {(count / 2)} / 5 correct</span> 
             <button className="btn--newGame" onClick={newGame}>Play Again</button>
+            <button className="btn--newGame" onClick={props.home}>Main Menu</button>
             </div>
             : 
             <button className="btn--check" onClick={checkAnswers}>Check Answers</button> 

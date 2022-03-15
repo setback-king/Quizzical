@@ -170,6 +170,10 @@ h4 {
   border-radius: 7.942387104034424px;
 }
 
+.wrong {
+ background-color: red;
+}
+
 .selected {
   background-color: #D6DBF5;
 }
@@ -179,3 +183,12 @@ hr {
   opacity: 25%
 }
 
+.selectCategory, .selectDifficulty {
+  margin-bottom: 25px;
+  margin-top: 10px;
+}
+
+select, option, label {
+  font-family: Inter, sans-serif;
+  color: #293264;
+}
