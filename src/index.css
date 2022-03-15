@@ -11,14 +11,13 @@ html, body {
 }
 
 .home {
-  width: 650px;
-  height: 650px;
+ 
   background: #F5F7FB;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 390px 75px;
+  padding: 200px 75px;
   
 }
 
@@ -82,7 +81,7 @@ html, body {
 .blob--blue {
   position: absolute;
   left: -80px;
-  top: 452px;
+  top: 590px;
   transform: rotate(-1.49deg);
   width: 250px;
   height: 300px;
@@ -192,3 +191,4 @@ select, option, label {
   font-family: Inter, sans-serif;
   color: #293264;
 }
+
