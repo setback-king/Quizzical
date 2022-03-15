@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 export default function App() {
 
 
-    const [quiz, setQuiz] = React.useState(true) 
+    const [quiz, setQuiz] = React.useState(false) 
     const [categories, setCategories] = useState([])
     const [difficulty, setDifficulty] = useState("")
     const [category, setCategory] = useState("")
