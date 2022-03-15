@@ -43,6 +43,7 @@ body {
   align-items: center;
   height: 100%;
   margin-top: 50% 70%;
+  width: 350px;
 }
 
 .btn--start {
@@ -138,19 +139,21 @@ body {
   font-weight: bold;
   font-size: 13px;
   color: #293264;
+  z-index: 1;
 }
 
 .newGame {
   display: flex;
   align-items: center;
-  gap: 22px;
+  gap: 15px;
   margin-top: 20px;
+  width: 300px;
 }
 
 .multiple {
   display: flex;
   flex-direction: column;
-  width: 420px;
+  width: 330px;
   z-index: 1;
 }
 
@@ -220,3 +223,4 @@ label {
   color: red;
   font-family: Inter, sans-serif;
 }
+
