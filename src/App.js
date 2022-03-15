@@ -7,10 +7,11 @@ import { useEffect, useState } from 'react'
 
 
 
+
 export default function App() {
 
 
-    const [quiz, setQuiz] = React.useState(false) 
+    const [quiz, setQuiz] = useState(false) 
     const [categories, setCategories] = useState([])
     const [difficulty, setDifficulty] = useState("")
     const [category, setCategory] = useState("")
@@ -69,8 +70,7 @@ function generateQuiz() {
     return (
         <div className="container">
             {!quiz && <Main categories={categories} name={category.value} difficulty={selectDifficulty} quizCategory={category.value} quizDifficulty={difficulty} category={selectCategory} generateQuiz={generateQuiz} /> }
-            {quiz && <Quiz home={generateQuiz} difficulty={difficulty} category={category.value}/>}
-        
+            {quiz && <Quiz home={generateQuiz} difficulty={difficulty} category={category.value}/>}  
         </div>
     )
 }

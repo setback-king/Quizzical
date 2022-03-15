@@ -25,15 +25,8 @@ export default function Quiz(props) {
             .catch((error) => console.log('Error: ' + error));
         }
         
-        fetchData()
-        
-      
+        fetchData()   
   }, [game])
-
-       //`https://opentdb.com/api.php?amount=5&category=${category}&difficulty=${difficulty}&type=multiple`
-
-    
-
 
 
     useEffect(()=> {
@@ -184,10 +177,10 @@ export default function Quiz(props) {
     
                 <h4>{decode(item[4].questions)}</h4>
                 <div className="answers">
-                    <div onClick={() => selectChoice(item[0].id, index, item[4].id)} style={{backgroundColor: item[0].background, opacity: item[0].opacity}} className={"choices"} key={item[0].id}>{decode(item[0].answer)}</div>  
-                    <div onClick={() => selectChoice(item[1].id, index, item[4].id)} style={{backgroundColor: item[1].background, opacity: item[1].opacity}} className={"choices"} key={item[1].id}>{decode(item[1].answer)}</div>
-                    <div onClick={() => selectChoice(item[2].id, index, item[4].id)} style={{backgroundColor: item[2].background, opacity: item[2].opacity}} className={"choices"} key={item[2].id}>{decode(item[2].answer)}</div>
-                    <div onClick={() => selectChoice(item[3].id, index, item[4].id)} style={{backgroundColor: item[3].background, opacity: item[3].opacity}} className={"choices"} key={item[3].id}>{decode(item[3].answer)}</div>
+                    <div onClick={() => selectChoice(item[0].id, item[4].id)} style={{backgroundColor: item[0].background, opacity: item[0].opacity}} className={"choices"} key={item[0].id}>{decode(item[0].answer)}</div>  
+                    <div onClick={() => selectChoice(item[1].id, item[4].id)} style={{backgroundColor: item[1].background, opacity: item[1].opacity}} className={"choices"} key={item[1].id}>{decode(item[1].answer)}</div>
+                    <div onClick={() => selectChoice(item[2].id, item[4].id)} style={{backgroundColor: item[2].background, opacity: item[2].opacity}} className={"choices"} key={item[2].id}>{decode(item[2].answer)}</div>
+                    <div onClick={() => selectChoice(item[3].id, item[4].id)} style={{backgroundColor: item[3].background, opacity: item[3].opacity}} className={"choices"} key={item[3].id}>{decode(item[3].answer)}</div>
                 </div>
                  <hr/>
             </div>
