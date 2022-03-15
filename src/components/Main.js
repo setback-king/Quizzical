@@ -15,9 +15,9 @@ const generateCategories = props.categories.map(category => {
             <h1 className="title">Quizzical</h1>
             <p className="description">Please select a category and difficult. Click on Start Quiz to begin.</p>
             <label htmlFor="categories">Choose a category:</label>
-
+            {props.alerts ? <div className='alert'>Please select a category</div> : ''}
             <select onChange={props.category} name={props.name} value={props.quizCategory} className="selectCategory" >
-
+                
                 <option selected disabled>Select...</option>
                 {generateCategories}
                 </select>
@@ -26,7 +26,6 @@ const generateCategories = props.categories.map(category => {
                 <option value="easy">Easy</option>
                 <option value="medium">Medium</option>
                 <option value="hard">Hard</option>
-                
                 </select>
             <button className="btn--start" onClick={props.generateQuiz}>Start Quiz</button>
             <div className="blob--yellow"></div>

@@ -11,7 +11,19 @@
 html, body {
   margin: 0;
   background: #F5F7FB;
-  min-width: 350px;
+  height: 100%
+
+  
+}
+
+.container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 480px;
+  min-height: 900px;
+  width: 100%
 
   
 }
@@ -23,7 +35,9 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 150px 120px;
+  height: 100%;
+  margin-top: 20%;
+  
   
 }
 
@@ -34,7 +48,9 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 200px 250px;
+  height: 100%;
+  margin-top: 50% 70%;
+  
   
 }
 
@@ -45,11 +61,13 @@ html, body {
   background: #4D5B9E;
   border-radius: 15px; 
   color: #F5F7FB;
+  z-index: 1;
 }
 
 .title {
   margin: 0;
   color: #293264;
+  z-index: 1;
 }
 
 .description {
@@ -57,15 +75,16 @@ html, body {
   margin-top: 8px;
   margin-bottom: 30px;
   color: #293264;
+  z-index: 1;
 }
 
 .blob--yellow {
   position: absolute;
-  left: 710.85px;
-  top: -10.73px;
+  left: 85%;
+  top: -7.73px;
   transform: rotate(-128.49deg);
-  width: 240px;
-  height: 140px;
+  width: 310px;
+  height: 190px;
   background: #FFFAD1;
   border-radius: 100px / 50px;
   
@@ -73,7 +92,7 @@ html, body {
 
 .blobSmall--yellow {
    position: absolute;
-  left: 540.85px;
+  left: 82%;
   top: -10.73px;
   transform: rotate(-128.49deg);
   width: 240px;
@@ -85,7 +104,7 @@ html, body {
 .blobSmall--blue {
   position: absolute;
   left: -135px;
-  top: 465px;
+  top: 90%;
   transform: rotate(-1.49deg);
   width: 210px;
   height: 140px;
@@ -98,7 +117,7 @@ html, body {
 .blob--blue {
   position: absolute;
   left: -80px;
-  top: 590px;
+  top: 80%;
   transform: rotate(-1.49deg);
   width: 250px;
   height: 300px;
@@ -146,7 +165,8 @@ html, body {
 .multiple {
   display: flex;
   flex-direction: column;
-  width: 420px
+  width: 420px;
+  z-index: 1;
   
 }
 
@@ -155,6 +175,7 @@ html, body {
   gap: 12px;
   margin-bottom: 5px;
   flex-wrap: wrap;
+  z-index: 1;
   
 }
 
@@ -184,6 +205,7 @@ h4 {
   padding: 8px 15px;
   border: 0.8px solid #4D5B9E;
   border-radius: 7.942387104034424px;
+  z-index: 1;
 }
 
 .wrong {
@@ -196,7 +218,8 @@ h4 {
 
 hr {
   width: 420px;
-  opacity: 25%
+  opacity: 25%;
+  z-index: 1;
 }
 
 .selectCategory, .selectDifficulty {
@@ -207,5 +230,11 @@ hr {
 select, option, label {
   font-family: Inter, sans-serif;
   color: #293264;
+  z-index: 1;
 }
 
+.alert {
+  color: red;
+  font-family: Inter, sans-serif;
+  
+}

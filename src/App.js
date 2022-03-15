@@ -15,6 +15,7 @@ export default function App() {
     const [categories, setCategories] = useState([])
     const [difficulty, setDifficulty] = useState("")
     const [category, setCategory] = useState("")
+    const [alert, setAlert] = useState(false)
   
 
 
@@ -58,18 +59,26 @@ function selectCategory(event){
    })
 
 
-   console.log(category.value)
+   
 }
 
 console.log(category.value)
     
-function generateQuiz() {
+function generateQuiz(e) {
+    if(category.value === undefined){
+     e.preventDefault()
+     setAlert(prevValue => !prevValue)
+    }
+    else {
     setQuiz(prevValue => prevValue = !prevValue)
+    setAlert(prevValue => prevValue = false)
+    }
+    
 }
     
     return (
         <div className="container">
-            {!quiz && <Main categories={categories} name={category.value} difficulty={selectDifficulty} quizCategory={category.value} quizDifficulty={difficulty} category={selectCategory} generateQuiz={generateQuiz} /> }
+            {!quiz && <Main alerts={alert} categories={categories} name={category.value} difficulty={selectDifficulty} quizCategory={category.value} quizDifficulty={difficulty} category={selectCategory} generateQuiz={generateQuiz} /> }
             {quiz && <Quiz home={generateQuiz} difficulty={difficulty} category={category.value}/>}  
         </div>
     )
