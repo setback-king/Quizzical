@@ -3,10 +3,27 @@
   font-family: "Inter", sans-serif;
 }
 
+@viewport {
+  width: device-width ;
+  zoom: 1.0 ;
+}
+
 html, body {
   margin: 0;
-  padding: 5px 5px;
   background: #F5F7FB;
+  min-width: 350px;
+
+  
+}
+
+.quiz {
+ 
+  background: #F5F7FB;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 150px 120px;
   
 }
 
@@ -17,7 +34,7 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 200px 75px;
+  padding: 200px 250px;
   
 }
 
