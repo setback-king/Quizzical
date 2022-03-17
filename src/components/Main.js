@@ -13,7 +13,7 @@ export default function Main(props) {
     <main className="home">
       <h1 className="title">Quizzical</h1>
       <p className="description">
-        Please select a category and difficult. Click on Start Quiz to begin.
+        Please select a category and difficulty. Click on Start Quiz to begin.
       </p>
       <label htmlFor="categories">Choose a category:</label>
       {props.alerts ? (

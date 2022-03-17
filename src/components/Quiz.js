@@ -92,7 +92,7 @@ export default function Quiz(props) {
     setAnswers((prevAnswers) => {
       return prevAnswers.map((item) => item.map((single) => {
         if (single.selected && single.correct ) {
-         setCount((prevCount) => (prevCount + 1));
+         setCount(prevCount => prevCount + 1);
           return {
             ...single,
             background: "#94D7A2",
