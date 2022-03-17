@@ -17,13 +17,13 @@ export default function App() {
         .then((json) => {
           const allCategories = json.trivia_categories;
           allCategories.map((category) => {
-            setCategories((prevCategories) => [
+            return (setCategories((prevCategories) => [
               ...prevCategories,
               {
                 id: category.id,
                 name: category.name,
               },
-            ]);
+            ]));
           });
         })
         .catch((error) => console.log("Error: " + error));
@@ -44,7 +44,7 @@ export default function App() {
     });
   }
 
-  console.log(category.value);
+  
 
   function generateQuiz(e) {
     if (category.value === undefined) {

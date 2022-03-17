@@ -22,7 +22,7 @@ export default function Quiz(props) {
     }
 
     fetchData();
-  }, [game]);
+  }, [game, props.difficulty, props.category]);
 
   useEffect(() => {
     function storeQuestions() {
@@ -85,40 +85,44 @@ export default function Quiz(props) {
     storeAnswers();
   }, [choice]);
 
-  console.log(count);
-
+  
   function checkAnswers() {
+    
     setChecked((prevValue) => !prevValue);
     setAnswers((prevAnswers) => {
-      return prevAnswers.map((item) => {
-        return item.map((single) => {
-          if (single.selected === true && single.correct === true) {
-            setCount((prevCount) => prevCount + 1);
-            return {
-              ...single,
-              background: "#94D7A2",
-            };
-          } else if (single.selected === true && single.correct === false) {
-            return {
-              ...single,
-              background: "#F8BCBC",
-              opacity: "0.5",
-            };
-          } else if (single.selected === false && single.correct === true) {
-            return {
-              ...single,
-              background: "#94D7A2",
-            };
-          } else
-            return {
-              ...single,
-              opacity: "0.5",
-              background: "",
-            };
-        });
-      });
+      return prevAnswers.map((item) => item.map((single) => {
+        if (single.selected === true && single.correct === true) {
+         setCount((prevCount) => (prevCount + 1));
+          return {
+            ...single,
+            background: "#94D7A2",
+          };
+        } else if (single.selected === true && single.correct === false) {
+          return {
+            ...single,
+            background: "#F8BCBC",
+            opacity: "0.5",
+          };
+        } else if (single.selected === false && single.correct === true) {
+          return {
+            ...single,
+            background: "#94D7A2",
+          };
+        }
+        else
+          return {
+            ...single,
+            opacity: "0.5",
+            background: "",
+          };
+          
+      }));
+    
     });
+   
   }
+  
+  
 
   function selectChoice(id, questionID) {
     console.log(questionID);
@@ -205,7 +209,7 @@ export default function Quiz(props) {
 
       {checked ? (
         <div className="newGame">
-          <span className="score">You scored {count / 2} / 5 correct</span>
+          <span className="score">You scored {count} / 5 correct</span>
           <button className="btn--newGame" onClick={newGame}>
             Play Again
           </button>
