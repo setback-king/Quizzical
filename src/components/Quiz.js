@@ -91,19 +91,19 @@ export default function Quiz(props) {
     setChecked((prevValue) => !prevValue);
     setAnswers((prevAnswers) => {
       return prevAnswers.map((item) => item.map((single) => {
-        if (single.selected === true && single.correct === true) {
+        if (single.selected && single.correct ) {
          setCount((prevCount) => (prevCount + 1));
           return {
             ...single,
             background: "#94D7A2",
           };
-        } else if (single.selected === true && single.correct === false) {
+        } else if (single.selected && !single.correct) {
           return {
             ...single,
             background: "#F8BCBC",
             opacity: "0.5",
           };
-        } else if (single.selected === false && single.correct === true) {
+        } else if (!single.selected && single.correct) {
           return {
             ...single,
             background: "#94D7A2",
