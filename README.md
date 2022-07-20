@@ -1,6 +1,13 @@
 
 DEMO HERE --------> https://setback-king.github.io/quizzical/
 
+This project utilized a free API to fetch trivia questions for a user to answer. The users have the ability to filter out quizzes by category and difficulty. Upon submittion, users are provided feedback with how many questions they answered correctly. 
+<img width="1288" alt="Screen Shot 2022-07-20 at 11 43 57 AM" src="https://user-images.githubusercontent.com/90795553/180026092-83deca9e-a227-47ad-bc15-bf7710c30c02.png">
+
+
+<img width="626" alt="Screen Shot 2022-07-20 at 11 44 36 AM" src="https://user-images.githubusercontent.com/90795553/180026111-b745563a-0b83-4a1e-9f4c-c6c3736bbc2e.png">
+<img width="578" alt="Screen Shot 2022-07-20 at 11 44 58 AM" src="https://user-images.githubusercontent.com/90795553/180026120-2e1d3a5f-755a-4e08-a5f0-169532802896.png">
+
 
 # Getting Started with Create React App
 
